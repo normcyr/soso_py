@@ -4,7 +4,7 @@
 virtualenv -p python3 venv
 ```
 
-## Activate the virutal environment
+## Activate the virtual environment
 
 ```bash
 source venv/bin/activate
@@ -17,6 +17,10 @@ pip install -r requirements
 ```
 
 ## Run the scraper
+
+Before running the program, you need to get the proper `list_requests.json` file.
+
+Then, go ahead!
 
 ```bash
 python soso.py

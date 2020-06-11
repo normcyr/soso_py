@@ -1,0 +1,36 @@
+{
+  "JSON": [
+    {
+      "pageId": 294091,
+      "pageName": "C1",
+      "pageImagePath": "743/C1_1571173058.png",
+      "pageIndex": 0,
+      "pageThumbnailPath": "743/thumbs/C1_1571173058.png",
+      "subchapters": [
+        {
+          "subchapterId": 81575,
+          "fkChapterId": 12650,
+          "chapter": {
+            "chapterId": 12650
+          }
+        }
+      ]
+    },
+    {
+      "pageId": 294092,
+      "pageName": "C2",
+      "pageImagePath": "743/C2_1571173068.png",
+      "pageIndex": 1,
+      "pageThumbnailPath": "743/thumbs/C2_1571173068.png",
+      "subchapters": [
+        {
+          "subchapterId": 81575,
+          "fkChapterId": 12650,
+          "chapter": {
+            "chapterId": 12650
+          }
+        }
+      ]
+    }
+  ]
+}

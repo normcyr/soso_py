@@ -21,19 +21,22 @@ def parse_json(json_file):
         data_thumbnails = json.load(file, strict=False)
 
         # extract only the entries list from the dictionary
-        entries = data_thumbnails["log"]["entries"]
+        entries = data_thumbnails["JSON"]
 
         # make a list of all urls in the dictionary
         for entry in entries:
-            url_list.append(entry["request"]["url"])
+            # url_list.append(entry["request"]["url"])
+            url_list.append(entry["pageImagePath"])
 
-    return url_list
+        book_number = url_list[0].split("/")[0]
+
+    return url_list, book_number
 
 
-def get_page(page_url):
+def get_page(full_url):
 
     # perform a GET request to download the png image and wait 1 second to not "overload" the server
-    image_page = requests.get(page_url, time.sleep(1))
+    image_page = requests.get(full_url, time.sleep(1))
 
     return image_page
 
@@ -50,31 +53,25 @@ def save_image(image_page, book_number):
 
 def main():
 
-    # define the filename where the bulk information is found
-    json_file = "list_requests.json"
+    # define the base url
+    base_url = "https://www.iplusinteractif.com/storage/assets-prod/book_content/"
 
-    book_number = "736"
+    # define the filename where the bulk information is found
+    json_file = "list_requests_test.json"
+    # json_file = "list_requests.json"
+
+
+    # parse the file and create a list of urls to get the thumbnails
+    url_list, book_number = parse_json(json_file)
 
     # make directory to save book if it does not exist
     if not os.path.exists(book_number):
         os.makedirs(book_number)
 
-    # parse the file and create a list of urls to get the thumbnails
-    url_list = parse_json(json_file)
-
-    # use the below URL as initial test
-    # url_list = ["https://www.iplusinteractif.com/storage/assets-prod/book_content/736/thumbs/192_1570219750.png"]
-
-    # loop through the list of URLs
-    for url in url_list:
-        # if the URL contains /thumbs, process it
-        if book_number + "/thumbs/" in url:
-            # replace the thumbs/ by nothing to create the URL corresponding to the full size image
-            page_url = url.replace("thumbs/", "")
-            # function to make the request to get the image
-            image_page = get_page(page_url)
-            # function to save the image
-            save_image(image_page, book_number)
+    for page_url in url_list:
+        full_url = base_url + page_url
+        image_page = get_page(full_url)
+        save_image(image_page, book_number)
 
 
 # run the main function if the library is invoked from the command prompt
