@@ -20,6 +20,8 @@ pip install -r requirements
 
 Before running the program, you need to get the proper `list_requests.json` file.
 
+Or alternatively, you can use the `list_requests_test.json` file to test the script.
+
 Then, go ahead!
 
 ```bash
